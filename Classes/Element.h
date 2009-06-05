@@ -209,17 +209,24 @@
 
 
 /**
- *	Convenience method for using a selector to find elements within the receiver that match.
+ *	Convenience method for using a selector to find the first element within the receiver that matches.
  *	See CSSSelector for details. Restricts the results to child elements of the receiver.
  */
--(NSArray*)childElementsWithCSSSelector:(CSSSelector*)selector;
+-(Element*)childElementWithCSSSelector:(CSSSelector*)selector;
 
 
 /**
- *	Convenience method for using a selector to find elements within the receiver that match
+ *	Convenience method for using a selector to find the first element within the receiver that matches.
  *	See CSSSelector for details.
  */
 -(Element*)selectElement:(NSString*)cssSelectorString;
+
+
+/**
+ *	Convenience method for using a selector to find the first element within the receiver that matches.
+ *	See CSSSelector for details. Restricts the results to child elements of the receiver.
+ */
+-(Element*)selectChildElement:(NSString*)cssSelectorString;
 
 
 /**
@@ -227,6 +234,13 @@
  *	See CSSSelector for details.
  */
 -(NSArray*)elementsWithCSSSelector:(CSSSelector*)selector;
+
+
+/**
+ *	Convenience method for using a selector to find elements within the receiver that match.
+ *	See CSSSelector for details. Restricts the results to child elements of the receiver.
+ */
+-(NSArray*)childElementsWithCSSSelector:(CSSSelector*)selector;
 
 
 /**

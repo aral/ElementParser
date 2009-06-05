@@ -190,6 +190,15 @@
 	return result;
 }
 
+-(Element*)selectChildElement:(NSString*)cssSelectorString{
+	if (!cssSelectorString) return nil;
+	CSSSelector* selector = [[CSSSelector alloc] initWithString: cssSelectorString];
+	Element* result = [self childElementWithCSSSelector: selector];
+	[selector release];
+	return result;
+}
+
+
 -(NSArray*)elementsWithCSSSelector:(CSSSelector*)selector{
 	CSSSelectorMatcher* matcher = [[CSSSelectorMatcher alloc] initWithSelector: selector];
 	Element* e = self;
@@ -218,9 +227,23 @@
 	CSSSelectorMatcher* matcher = [[CSSSelectorMatcher alloc] initWithSelector: selector];
 	Element* e = self;
 	BOOL success = NO;
+
 	while (e && !success){
 		success = [matcher matchElement: e];
 		e = [e nextElementWithinScope: self];
+	}
+	Element* result = [matcher firstMatch];
+	[matcher release];
+	return result;
+}
+
+-(Element*)childElementWithCSSSelector:(CSSSelector*)selector{
+	CSSSelectorMatcher* matcher = [[CSSSelectorMatcher alloc] initWithSelector: selector];
+	Element* e = [self firstChild];
+	BOOL success = NO;
+	while (e && !success){
+		success = [matcher matchElement: e];
+		e = e.nextSybling;
 	}
 	Element* result = [matcher firstMatch];
 	[matcher release];
